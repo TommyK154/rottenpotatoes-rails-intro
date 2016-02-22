@@ -52,6 +52,9 @@ class MoviesController < ApplicationController
     
     @movies = Movie.sort_by_and_rating(@sort, @ratings_filter)
 =end GOOD STUFF  
+
+    @sort = params[:sort] || session[:sort]
+    if params[:sort] != session[:sort] then session[:sort] = @sort
     
     if (params[:ratings] and params[:commit] == 'Refresh')
         @ratings_filter = params[:ratings].keys
@@ -61,11 +64,11 @@ class MoviesController < ApplicationController
 
     #@ratings_filter = params[:ratings].keys || session[:ratings] || @all_ratings
 
-    @sort = params[:sort] || session[:sort]
-    session[:sort] = @sort
+    
 
     #save cookies
-    if params[:sort] != session[:sort] or params[:ratings] != session[:ratings]
+    #if params[:sort] != session[:sort] or params[:ratings] != session[:ratings]
+    if params[:ratings] != session[:ratings]
         session[:ratings] = @ratings_filter
         #session[:sort] = @sort
         redirect_to movies_path :sort => @sort, :ratings => @ratings_filter# and return
