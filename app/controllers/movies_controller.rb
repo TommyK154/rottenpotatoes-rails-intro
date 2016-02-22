@@ -14,11 +14,13 @@ class MoviesController < ApplicationController
     @movies = Movie.all
     
     sort = params[:sort]
-    if sort == 'title' then
-       @movies = Movie.all.sort_by { |movie| movie.title }
-    elsif sort == 'release_date' then
-       @movies = Movie.all.sort_by { |movie| movie.release_date }
-    end
+    @movies = Movie.order(sort)
+    #if sort == 'title' then
+       #@movies = Movie.all.sort_by { |movie| movie.title }
+       #@movies = Movie.order(@by_column).where(rating: @select_ratings)
+    #elsif sort == 'release_date' then
+       #@movies = Movie.all.sort_by { |movie| movie.release_date }
+    #end
 
   end
 
