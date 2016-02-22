@@ -31,7 +31,7 @@ class MoviesController < ApplicationController
     end
 =end
 
-    if (params[:ratings]) # and params[:commit] == 'Refresh')
+    if (params[:ratings] and params[:commit] == 'Refresh')
         @ratings_filter = params[:ratings].keys
     elsif params[:ratings]
         @ratings_filter = params[:ratings]
