@@ -7,11 +7,11 @@ class Movie < ActiveRecord::Base
     def self.sort_by_and_rating(sort, rating)
         case sort
             when nil
-                Movie.where('rating IN (?)', rating)
+                Movie.where('rating in (?)', rating)
             when 'title' then
-                Movie.where('rating IN (?)', rating).order('title')
+                Movie.where('rating in (?)', rating).order('title')
             when 'release_date' then
-                Movie.where('rating IN (?)', rating).order('release_date')
+                Movie.where('rating in (?)', rating).order('release_date')
         end
     end
         
