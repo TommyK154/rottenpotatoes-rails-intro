@@ -54,9 +54,7 @@ class MoviesController < ApplicationController
 =end GOOD STUFF  
     
     if (params[:ratings] and params[:commit] == 'Refresh')
-        @ratings_filter = params[:ratings].keys
-    #elsif params[:ratings]
-       # @ratings_filter = params[:ratings]
+        @ratings_filter = params[:ratings] #.keys
     else
         @ratings_filter = session[:ratings] || @all_ratings
     end
