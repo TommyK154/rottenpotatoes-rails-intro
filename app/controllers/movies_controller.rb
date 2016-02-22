@@ -13,21 +13,17 @@ class MoviesController < ApplicationController
   def index
     @movies = Movie.all
     @all_ratings = Movie.all_ratings
-    @ratings_filter = @all_ratings
+    ratings_filter = @all_ratings
     
     sort = params[:sort]
-    @movies = Movie.order(sort)
+    #@movies = Movie.order(sort)
+    
     
     if params[:ratings]
-      @ratings_filter = params[:ratings].keys
+      ratings_filter = params[:ratings].keys
     end
-    @movies = Movie.where("rating in (?)", @ratings_filter).all
-    #if sort == 'title' then
-       #@movies = Movie.all.sort_by { |movie| movie.title }
-       #@movies = Movie.order(@by_column).where(rating: @select_ratings)
-    #elsif sort == 'release_date' then
-       #@movies = Movie.all.sort_by { |movie| movie.release_date }
-    #end
+    #@movies = Movie.where("rating in (?)", @ratings_filter).all
+    @movies = Movie.sort_by_and_rating(sort, ratings_filter)
 
   end
 
