@@ -40,7 +40,7 @@ class MoviesController < ApplicationController
     end
 =end
 
-    @ratings_filter = params[:ratings] || session[:ratings] || @all_ratings
+    @ratings_filter = params[:ratings].keys || session[:ratings] || @all_ratings
 
     @sort = params[:sort] || session[:sort]
 
