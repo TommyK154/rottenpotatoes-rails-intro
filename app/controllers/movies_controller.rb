@@ -31,6 +31,16 @@ class MoviesController < ApplicationController
     end
 =end
 
+    if (params[:ratings] and params[:commit] == 'Refresh')
+        @ratings_filter = params[:ratings].keys
+    elsif params[:ratings]
+        @ratings_filter = params[:ratings]
+    else
+        @ratings_filter = session[:ratings] || @all_ratings
+    end
+
+    @sort = params[:sort] || session[:sort]
+
     if params[:sort] != session[:sort] or params[:ratings] != session[:ratings]
         session[:ratings] = @ratings_filter
         session[:sort] = @sort
