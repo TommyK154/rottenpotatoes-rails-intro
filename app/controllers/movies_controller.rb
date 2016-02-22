@@ -14,15 +14,29 @@ class MoviesController < ApplicationController
     @movies = Movie.all
     @all_ratings = Movie.all_ratings
     @ratings_filter = @all_ratings
+
+=begin  
+    #unless params[:sort] @sort = session[:sort]
+    #unless params[:ratings] @ratings_filter = session[:ratings]
+    
     
     if params[:sort]
       @sort = params[:sort]
+      #session[:sort] = @sort
     end
     
     if params[:ratings]
       @ratings_filter = params[:ratings].keys
+      #session[:ratings] = @ratings_filter
     end
+=end
 
+    if params[:sort] != session[:sort] or params[:ratings] != session[:ratings]
+        session[:ratings] = @ratings_filter
+        session[:sort] = @sort
+        redirect_to movies_path :sort => @sort, :ratings => @ratings_filter and return
+    end
+    
     @movies = Movie.sort_by_and_rating(@sort, @ratings_filter)
 
   end
