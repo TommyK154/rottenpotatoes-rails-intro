@@ -23,7 +23,7 @@ class MoviesController < ApplicationController
       @ratings_filter = params[:ratings].keys
     end
     #@movies = Movie.where("rating in (?)", @ratings_filter).all
-    @movies = Movie.sort_by_and_rating(sort, ratings_filter)
+    @movies = Movie.sort_by_and_rating(sort, @ratings_filter)
 
   end
 
