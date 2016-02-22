@@ -13,9 +13,15 @@ class MoviesController < ApplicationController
   def index
     @movies = Movie.all
     @all_ratings = Movie.all_ratings
+    @ratings_filter = @all_ratings
     
     sort = params[:sort]
-    @movies = Movie.order(sort)
+    @movies = Movie.order
+    
+    if params[:ratings]
+      @ratings_filter = params[:ratings].keys
+    end
+    @movies = Movie.where("rating in (?)", @ratings_filter).all
     #if sort == 'title' then
        #@movies = Movie.all.sort_by { |movie| movie.title }
        #@movies = Movie.order(@by_column).where(rating: @select_ratings)
