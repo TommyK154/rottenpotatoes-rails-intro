@@ -15,15 +15,15 @@ class MoviesController < ApplicationController
     @all_ratings = Movie.all_ratings
     @ratings_filter = @all_ratings
     
-    sort = params[:sort]
-    #@movies = Movie.order(sort)
-    
+    if params[:sort]
+      @sort = params[:sort]
+    end
     
     if params[:ratings]
       @ratings_filter = params[:ratings].keys
     end
-    #@movies = Movie.where("rating in (?)", @ratings_filter).all
-    @movies = Movie.sort_by_and_rating(sort, @ratings_filter)
+
+    @movies = Movie.sort_by_and_rating(@sort, @ratings_filter)
 
   end
 
