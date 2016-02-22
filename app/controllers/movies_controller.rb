@@ -13,14 +13,14 @@ class MoviesController < ApplicationController
   def index
     @movies = Movie.all
     @all_ratings = Movie.all_ratings
-    ratings_filter = @all_ratings
+    @ratings_filter = @all_ratings
     
     sort = params[:sort]
     #@movies = Movie.order(sort)
     
     
     if params[:ratings]
-      ratings_filter = params[:ratings].keys
+      @ratings_filter = params[:ratings].keys
     end
     #@movies = Movie.where("rating in (?)", @ratings_filter).all
     @movies = Movie.sort_by_and_rating(sort, ratings_filter)
