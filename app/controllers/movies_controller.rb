@@ -29,10 +29,32 @@ class MoviesController < ApplicationController
       #session[:ratings] = @ratings_filter
     end
 =end  CRAP
-
+=begin GOOD STUFF
     #params[:commit] has the value of the last button pressed
     if (params[:ratings] and params[:commit] == 'Refresh')
         @ratings_filter = params[:ratings].keys
+    elsif params[:ratings]
+        @ratings_filter = params[:ratings]
+    else
+        @ratings_filter = session[:ratings] || @all_ratings
+    end
+
+    #@ratings_filter = params[:ratings].keys || session[:ratings] || @all_ratings
+
+    @sort = params[:sort] || session[:sort]
+
+    #save cookies
+    if params[:sort] != session[:sort] or params[:ratings] != session[:ratings]
+        session[:ratings] = @ratings_filter
+        session[:sort] = @sort
+        redirect_to movies_path :sort => @sort, :ratings => @ratings_filter# and return
+    end
+    
+    @movies = Movie.sort_by_and_rating(@sort, @ratings_filter)
+=end GOOD STUFF  
+    
+    if (params[:ratings] and params[:commit] == 'Refresh')
+        @ratings_filter = params[:ratings]
     elsif params[:ratings]
         @ratings_filter = params[:ratings]
     else
