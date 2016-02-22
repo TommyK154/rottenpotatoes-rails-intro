@@ -16,7 +16,7 @@ class MoviesController < ApplicationController
     @ratings_filter = @all_ratings
     
     sort = params[:sort]
-    @movies = Movie.order
+    @movies = Movie.order(sort)
     
     if params[:ratings]
       @ratings_filter = params[:ratings].keys
